@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sam!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;  /* Center items horizontally */
+            height: 100vh;
+            margin: 0;
+            font-family: 'Pixelify Sans', sans-serif;  /* Use Pixelify Sans */
+            background: url('/static/bg.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: #E39E54;
+            text-shadow: 2px 2px 4px #000000;
+            overflow: hidden;
+            cursor: url('/static/cursor.cur'), auto;  /* Custom cursor */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;  /* Align items to the left and right */
+            align-items: center;  /* Center items vertically */
+            width: 100%;  /* Full width of the page */
+            padding: 20px;  /* Add padding to create space around the header */
+            position: relative;  /* Position relative to allow absolute positioning of the heading */
+            margin-top: 40px; 
+        }
+        h1 {
+            color: #d536d4;
+            font-size: 3em;  /* Increase font size for the main heading */
+            letter-spacing: 2px;  /* Increase letter spacing */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            
+        }
+        .links a {
+            color: #E39E54;
+            font-size: 1.8em;  /* Smaller font size for links */
+            text-decoration: none;  /* Remove underline */
+            text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
+        }
+        .links a:hover {
+            text-decoration: underline;  /* Underline on hover */
+        }
+        .right {
+            margin-right: 140px;  /* Move right links a bit to the left */
+        }
+        .left {
+            margin-left: 60px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="links left">
+            <a href="/card">card</a>
+            <a href="/game">magic 8 ball</a>
+        </div>
+        <h1>HAPPY BIRTHDAY SAM!</h1>
+        <div class="links right">
+            <a href="/birthday_wishes">from me</a>
+            <a href="/heart">&lt;3</a>
+        </div>
+    </div>
+    <div style="flex-grow: 1;"></div>  <!-- Empty space to push the header to the top -->
+</body>
+</html>
