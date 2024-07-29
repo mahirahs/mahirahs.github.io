@@ -55,6 +55,38 @@
         .left {
             margin-left: 60px;
         }
+        .image-row {
+            display: flex;
+            justify-content: center;  /* Center the images horizontally */
+            align-items: center;  /* Center images vertically */
+            flex-grow: 1;  /* Take up remaining space */
+            width: 100%;  /* Full width of the container */
+            gap: 20px;  /* Space between images */
+            margin-top: 40px;
+        }
+        .image-container {
+            text-align: center;  /* Center text under each image */
+
+        }
+        .image-container img {
+            max-width: 60%;  /* Make images responsive */
+            height: auto;  /* Maintain aspect ratio */
+            border: 2px solid #E39E54;  /* Border color */
+            border-radius: 10px;  /* Rounded corners */
+        }
+        .caption {
+            margin-top: 10px;  /* Space between image and caption */
+            font-size: 1.2em;  /* Caption font size */
+            color: #E39E54;  /* Caption color */
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;  /* Position it 10px from the bottom */
+            right: 10px;  /* Position it 10px from the right */
+            color: white;
+            font-size: 1em;
+            text-shadow: 1px 1px 2px #000000;  /* Shadow effect for visibility */
+        }
 
     </style>
 </head>
@@ -70,6 +102,38 @@
             <a href="/heart">&lt;3</a>
         </div>
     </div>
+    <div class="image-row">
+        <div class="image-container">
+            <img src="/static/roses.png" alt="Image 1">
+            <div class="caption">flowers for your birthday</div>
+        </div>
+        <div class="image-container">
+            <img src="/static/cake.png" alt="Image 2">
+            <div class="caption">a cake for your birthday</div>
+        </div>
+        <div class="image-container">
+            <img src="/static/cake.png" alt="Image 3">
+            <div class="caption">a kiss for your birthday</div>
+        </div>
+    </div>
     <div style="flex-grow: 1;"></div>  <!-- Empty space to push the header to the top -->
+    <div class="footer">
+        <!--Turn on your speaker!-->
+    </div>
+    <!-- Audio Element -->
+    <audio id="background-audio" loop>
+        <source src="/static/hbd.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript to play the audio -->
+    <script>
+        window.onload = function() {
+            var audio = document.getElementById('background-audio');
+            audio.play();
+        };
+    </script>
+
+    
 </body>
 </html>

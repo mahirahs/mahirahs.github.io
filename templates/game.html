@@ -9,48 +9,175 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            align-items: center;  /* Center items horizontally */
             height: 100vh;
             margin: 0;
             font-family: 'Pixelify Sans', sans-serif;  /* Use Pixelify Sans */
-            background: url('/static/background.gif') no-repeat center center fixed;
+            background: url('/static/bg.gif') no-repeat center center fixed;
             background-size: cover;
             color: #E39E54;
             text-shadow: 2px 2px 4px #000000;
+            overflow: hidden;
+            cursor: url('/static/cursor.cur'), auto;  /* Custom cursor */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;  /* Align items to the left and right */
+            align-items: center;  /* Center items vertically */
+            width: 100%;  /* Full width of the page */
+            padding: 20px;  /* Add padding to create space around the header */
+            position: relative;  /* Position relative to allow absolute positioning of the heading */
+            margin-top: 40px; 
         }
         h1 {
-            color: #E39E54;
-            font-size: 3em;  /* Increase font size */
+            color: #d536d4;
+            font-size: 3em;  /* Increase font size for the main heading */
             letter-spacing: 2px;  /* Increase letter spacing */
-        }
-        .links {
-            display: flex;
-            justify-content: left;
-            width: 100%;
-            margin-bottom: 20px;  /* Space between links and heading */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            
         }
         .links a {
             color: #E39E54;
-            font-size: 1.2em;  /* Smaller font size for links */
-            margin-right: 15px;  /* Space between links */
+            font-size: 1.8em;  /* Smaller font size for links */
             text-decoration: none;  /* Remove underline */
             text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
         }
         .links a:hover {
             text-decoration: underline;  /* Underline on hover */
         }
+        .right {
+            margin-right: 140px;  /* Move right links a bit to the left */
+        }
+        .left {
+            margin-left: 60px;
+        }
+        p {
+            color: #d536d4;
+            font-size: 1.5em;  /* Increase font size for the main heading */
+            letter-spacing: 2px;  /* Increase letter spacing */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            margin-top: 130px;
+            
+        }
     </style>
 </head>
 <body>
-    <div class="links">
-        <a href="/">Happy Birthday Sam!</a>
-        <a href="/birthday_wishes">Birthday Wishes</a>
-        <a href="/game">Game</a>
-        <a href="/card">Card</a>
-        <a href="/heart">&lt;3</a>
+    <div class="header">
+        <div class="links left">
+            <a href="/card">card</a>
+            <a href="/game">magic 8 ball</a>
+        </div>
+        <h1>HAPPY BIRTHDAY SAM!</h1>
+        <div class="links right">
+            <a href="/birthday_wishes">from me</a>
+            <a href="/heart">&lt;3</a>
+        </div>
     </div>
-    <h1>Game</h1>
-    <p>Let's play a fun game!</p>
+    <p>Let's play magic 8 ball!</p>
+    <!-- Audio Element -->
+    <audio id="background-audio" loop>
+        <source src="/static/hbd.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript to play the audio -->
+    <script>
+        window.onload = function() {
+            var audio = document.getElementById('background-audio');
+            audio.play();
+        };
+    </script>
+
+    <!-- templates/game.html -->
+
+
+
+
+{% block content %}
+<div class="magic-8-ball-container">
+    <img id="magic-8-ball" src="/static/8ball.png" alt="Magic 8 Ball">
+    <button id="shake-button">Shake the 8 Ball</button>
+    <div id="message"></div>
+</div>
+
+<style>
+    .magic-8-ball-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    #magic-8-ball {
+        width: 200px;
+        height: 200px;
+    }
+    #shake-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: #E39E54;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #message {
+        margin-top: 20px;
+        font-size: 1.5em;
+        color: #E39E54;
+        text-shadow: 1px 1px 2px #000000;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = [
+            "Mahirah says yes!", "Babe... come on...", "ABSOLUTELY NOT", "Ask again later", "Definitely", 
+            "Absolutely not", "It is certain", "It is decidedly so", "Without a doubt", 
+            "Yes – definitely", "You may rely on it", "As I see it, yes", 
+            "Most likely", "Outlook good", "Yes", "Signs point to yes", 
+            "Reply hazy, try again", "Ask again later", "Better not tell you now", 
+            "Cannot predict now", "Concentrate and ask again", 
+            "Don't count on it", "My reply is no", "My sources say no", 
+            "Outlook not so good", "Very doubtful", "Absolutely", "Certainly not", 
+            "Go for it", "No way"
+        ];
+
+        const magic8Ball = document.getElementById('magic-8-ball');
+        const messageDiv = document.getElementById('message');
+        const shakeButton = document.getElementById('shake-button');
+
+        shakeButton.addEventListener('click', function() {
+            messageDiv.textContent = '';
+            magic8Ball.classList.add('shake');
+            setTimeout(function() {
+                magic8Ball.classList.remove('shake');
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                messageDiv.textContent = randomMessage;
+            }, 2000);
+        });
+    });
+</script>
+
+<style>
+    @keyframes shake {
+        0%, 100% { transform: translate(0, 0); }
+        10%, 30%, 50%, 70%, 90% { transform: translate(-10px, 0); }
+        20%, 40%, 60%, 80% { transform: translate(10px, 0); }
+    }
+    .shake {
+        animation: shake 0.2s infinite;
+    }
+</style>
+{% endblock %}
+
 </body>
 </html>

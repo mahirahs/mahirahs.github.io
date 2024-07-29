@@ -9,48 +9,120 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            align-items: center;  /* Center items horizontally */
             height: 100vh;
             margin: 0;
             font-family: 'Pixelify Sans', sans-serif;  /* Use Pixelify Sans */
-            background: url('/static/background.gif') no-repeat center center fixed;
+            background: url('/static/bg.gif') no-repeat center center fixed;
             background-size: cover;
             color: #E39E54;
             text-shadow: 2px 2px 4px #000000;
+            overflow: hidden;
+            cursor: url('/static/cursor.cur'), auto;  /* Custom cursor */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;  /* Align items to the left and right */
+            align-items: center;  /* Center items vertically */
+            width: 100%;  /* Full width of the page */
+            padding: 20px;  /* Add padding to create space around the header */
+            position: relative;  /* Position relative to allow absolute positioning of the heading */
+            margin-top: 40px; 
         }
         h1 {
-            color: #E39E54;
-            font-size: 3em;  /* Increase font size */
+            color: #d536d4;
+            font-size: 3em;  /* Increase font size for the main heading */
             letter-spacing: 2px;  /* Increase letter spacing */
-        }
-        .links {
-            display: flex;
-            justify-content: left;
-            width: 100%;
-            margin-bottom: 20px;  /* Space between links and heading */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            
         }
         .links a {
             color: #E39E54;
-            font-size: 1.2em;  /* Smaller font size for links */
-            margin-right: 15px;  /* Space between links */
+            font-size: 1.8em;  /* Smaller font size for links */
             text-decoration: none;  /* Remove underline */
             text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
         }
         .links a:hover {
             text-decoration: underline;  /* Underline on hover */
         }
+        .right {
+            margin-right: 140px;  /* Move right links a bit to the left */
+        }
+        .left {
+            margin-left: 60px;
+        }
     </style>
 </head>
 <body>
-    <div class="links">
-        <a href="/">Happy Birthday Sam!</a>
-        <a href="/birthday_wishes">Birthday Wishes</a>
-        <a href="/game">Game</a>
-        <a href="/card">Card</a>
-        <a href="/heart">&lt;3</a>
+    <div class="header">
+        <div class="links left">
+            <a href="/card">card</a>
+            <a href="/game">magic 8 ball</a>
+        </div>
+        <h1>HAPPY BIRTHDAY SAM!</h1>
+        <div class="links right">
+            <a href="/birthday_wishes">from me</a>
+            <a href="/heart">&lt;3</a>
+        </div>
     </div>
-    <h1>Card</h1>
-    <p>Here is a lovely card for you!</p>
+
+    {% block title %}Card{% endblock %}
+
+    {% block content %}
+    <div class="card-container">
+        <img id="card-image" src="/static/closed_card.png" alt="Closed Card">
+        <button id="toggle-button">Open</button>
+    </div>
+    
+    <style>
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        #card-image {
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+            transition: width 0.5s ease;
+        }
+        #toggle-button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #E39E54;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('toggle-button');
+            const cardImage = document.getElementById('card-image');
+            let isOpen = false;
+    
+            toggleButton.addEventListener('click', function() {
+                if (isOpen) {
+                    cardImage.src = '/static/closed_card.png';
+                    cardImage.style.width = '300px';  // Revert to original size
+                    toggleButton.textContent = 'Open';
+                } else {
+                    cardImage.src = '/static/open_card1.png';
+                    cardImage.style.width = '500px';  // Adjust the size as needed
+                    toggleButton.textContent = 'Close';
+                }
+                isOpen = !isOpen;
+            });
+        });
+    </script>
+    {% endblock %}
 </body>
 </html>
