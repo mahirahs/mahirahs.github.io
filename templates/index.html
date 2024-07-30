@@ -55,6 +55,25 @@
         .left {
             margin-left: 60px;
         }
+        .links_c a {
+            color: #d536d4;
+            font-size: 3em;  /* Smaller font size for links */
+            text-decoration: none;  /* Remove underline */
+            text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
+        }
+        .links_c a:hover {
+            text-decoration: underline;  /* Underline on hover */
+        }
+        .center {
+            color: #d536d4;
+            letter-spacing: 2px;  /* Increase letter spacing */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            text-decoration: none;
+        }
         .image-row {
             display: flex;
             justify-content: center;  /* Center the images horizontally */
@@ -96,9 +115,12 @@
             <a href="/card">card</a>
             <a href="/game">magic 8 ball</a>
         </div>
-        <h1>HAPPY BIRTHDAY SAM!</h1>
+        <div class="links_c center">
+            <a href="/">HAPPY BIRTHDAY SAM!</a>
+        </div>
+    
         <div class="links right">
-            <a href="/birthday_wishes">from me</a>
+            <a href="/songs">songs</a>
             <a href="/heart">&lt;3</a>
         </div>
     </div>

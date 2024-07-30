@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card</title>
+    <title>Songs in the Playlist</title>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
     <style>
         body {
@@ -19,6 +19,7 @@
             text-shadow: 2px 2px 4px #000000;
             overflow: hidden;
             cursor: url('/static/cursor.cur'), auto;  /* Custom cursor */
+            overflow: auto;  /* Allow scrolling */
         }
         .header {
             display: flex;
@@ -37,7 +38,6 @@
             position: absolute;  /* Absolute positioning */
             left: 50%;  /* Center horizontally */
             transform: translateX(-50%);  /* Adjust to truly center */
-            
         }
         .links a {
             color: #E39E54;
@@ -49,12 +49,6 @@
         .links a:hover {
             text-decoration: underline;  /* Underline on hover */
         }
-        .right {
-            margin-right: 140px;  /* Move right links a bit to the left */
-        }
-        .left {
-            margin-left: 60px;
-        }
         .links_c a {
             color: #d536d4;
             font-size: 3em;  /* Smaller font size for links */
@@ -65,14 +59,25 @@
         .links_c a:hover {
             text-decoration: underline;  /* Underline on hover */
         }
-        .center {
-            color: #d536d4;
-            letter-spacing: 2px;  /* Increase letter spacing */
-            margin: 0;  /* Remove default margin */
-            position: absolute;  /* Absolute positioning */
-            left: 50%;  /* Center horizontally */
-            transform: translateX(-50%);  /* Adjust to truly center */
-            text-decoration: none;
+        ul {
+            list-style: none;  /* Remove bullet points */
+            padding: 0;  /* Remove default padding */
+            margin-top: 20px;  /* Add space above the list */
+            max-width: 600px;  /* Limit width for better layout */
+            text-align: center;  /* Center the text */
+            overflow-y: auto;  /* Enable vertical scrolling */
+            max-height: 60vh;  /* Set a max height for the list */
+        }
+        li {
+            background-color: rgba(255, 255, 255, 0.1);  /* Light background for list items */
+            border: 1px solid #E39E54;  /* Border around items */
+            border-radius: 5px;  /* Rounded corners */
+            padding: 10px;  /* Padding inside items */
+            margin: 10px 0;  /* Space between items */
+            transition: background-color 0.3s;  /* Smooth background color change */
+        }
+        li:hover {
+            background-color: rgba(255, 255, 255, 0.2);  /* Darken background on hover */
         }
     </style>
 </head>
@@ -91,60 +96,16 @@
         </div>
     </div>
 
-
-
-    {% block content %}
-    <div class="card-container">
-        <img id="card-image" src="/static/closed_card.png" alt="Closed Card">
-        <button id="toggle-button">Open</button>
-    </div>
-    
-    <style>
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            margin-top: -60px;
-        }
-        #card-image {
-            width: 300px;
-            height: auto;
-            margin-bottom: 20px;
-            transition: width 0.5s ease;
-        }
-        #toggle-button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #E39E54;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButton = document.getElementById('toggle-button');
-            const cardImage = document.getElementById('card-image');
-            let isOpen = false;
-    
-            toggleButton.addEventListener('click', function() {
-                if (isOpen) {
-                    cardImage.src = '/static/closed_card.png';
-                    cardImage.style.width = '300px';  // Revert to original size
-                    toggleButton.textContent = 'Open';
-                } else {
-                    cardImage.src = '/static/open_card1.png';
-                    cardImage.style.width = '500px';  // Adjust the size as needed
-                    toggleButton.textContent = 'Close';
-                }
-                isOpen = !isOpen;
-            });
-        });
-    </script>
-    {% endblock %}
+    <ul>
+        {% for item in songs %}
+            <li>
+                <strong>{{ item.track.name }}</strong> by {{ item.track.artists[0].name }}
+                {% if item.track.external_urls.spotify %}
+                    <a href="{{ item.track.external_urls.spotify }}" target="_blank">Listen on Spotify</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Home</a>
 </body>
 </html>

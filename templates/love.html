@@ -9,48 +9,317 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            align-items: center;  /* Center items horizontally */
             height: 100vh;
             margin: 0;
             font-family: 'Pixelify Sans', sans-serif;  /* Use Pixelify Sans */
-            background: url('/static/background.gif') no-repeat center center fixed;
+            background: url('/static/bg.gif') no-repeat center center fixed;
             background-size: cover;
             color: #E39E54;
             text-shadow: 2px 2px 4px #000000;
+            overflow: hidden;
+            cursor: url('/static/cursor.cur'), auto;  /* Custom cursor */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;  /* Align items to the left and right */
+            align-items: center;  /* Center items vertically */
+            width: 100%;  /* Full width of the page */
+            padding: 20px;  /* Add padding to create space around the header */
+            position: relative;  /* Position relative to allow absolute positioning of the heading */
+            margin-top: 40px; 
         }
         h1 {
-            color: #E39E54;
-            font-size: 3em;  /* Increase font size */
+            color: #d536d4;
+            font-size: 3em;  /* Increase font size for the main heading */
             letter-spacing: 2px;  /* Increase letter spacing */
-        }
-        .links {
-            display: flex;
-            justify-content: left;
-            width: 100%;
-            margin-bottom: 20px;  /* Space between links and heading */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            
         }
         .links a {
             color: #E39E54;
-            font-size: 1.2em;  /* Smaller font size for links */
-            margin-right: 15px;  /* Space between links */
+            font-size: 1.8em;  /* Smaller font size for links */
             text-decoration: none;  /* Remove underline */
             text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
         }
         .links a:hover {
             text-decoration: underline;  /* Underline on hover */
         }
+        .right {
+            margin-right: 140px;  /* Move right links a bit to the left */
+        }
+        .left {
+            margin-left: 60px;
+        }
+        .links_c a {
+            color: #d536d4;
+            font-size: 3em;  /* Smaller font size for links */
+            text-decoration: none;  /* Remove underline */
+            text-shadow: 1px 1px 2px #000000;  /* Shadow effect for links */
+            margin: 0 45px;  /* Space between links */
+        }
+        .links_c a:hover {
+            text-decoration: underline;  /* Underline on hover */
+        }
+        .center {
+            color: #d536d4;
+            letter-spacing: 2px;  /* Increase letter spacing */
+            margin: 0;  /* Remove default margin */
+            position: absolute;  /* Absolute positioning */
+            left: 50%;  /* Center horizontally */
+            transform: translateX(-50%);  /* Adjust to truly center */
+            text-decoration: none;
+        }
+        .container {
+            
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .timer {
+            text-align: left;
+            margin-left: 150px;
+            margin-top:170px;
+            font-size: 1.3em;
+            
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 60%;
+            margin-right: 50px;
+            right: -240px;
+            top: -240px;
+        }
+        .slideshow {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: none;
+            text-align: center;
+        }
+        .slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .caption {
+            color: #E39E54;
+            font-size: 1.2em;
+            padding: 10px;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            width: auto;
+            padding: 16px;
+            color: blue;
+            font-weight: bold;
+            font-size: 35px;
+            transition: 0.6s ease;
+            user-select: none;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .prev {
+            left: calc(29% - 30px); /* Adjusted to align next to the image */
+        }
+        .next {
+            right: calc(29% - 30px); /* Adjusted to align next to the image */
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
     </style>
 </head>
 <body>
-    <div class="links">
-        <a href="/">Happy Birthday Sam!</a>
-        <a href="/birthday_wishes">Birthday Wishes</a>
-        <a href="/game">Game</a>
-        <a href="/card">Card</a>
-        <a href="/heart">&lt;3</a>
+    <div class="header">
+        <div class="links left">
+            <a href="/card">card</a>
+            <a href="/game">magic 8 ball</a>
+        </div>
+        <div class="links_c center">
+            <a href="/">HAPPY BIRTHDAY SAM!</a>
+        </div>
+        <div class="links right">
+            <a href="/songs">songs</a>
+            <a href="/heart">&lt;3</a>
+        </div>
     </div>
-    <h1>&lt;3</h1>
-    <p>Sending you lots of love!</p>
+
+    <div class="container">
+        <div class="timer">
+            <h2>How long we've been together!!</h2>
+            <div id="time" style="font-size: 1.5em;"></div>
+        </div>
+        <div class="slideshow-container">
+            <div class="slideshow">
+                <div class="slide fade">
+                    <img src="/static/pic1.jpg" alt="pic 1">
+                    <div class="caption">Caption 1</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic3.jpg" alt="pic 2">
+                    <div class="caption">Caption 2</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic8.jpg" alt="pic 2">
+                    <div class="caption">Caption 3</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic10.jpg" alt="pic 2">
+                    <div class="caption">Caption 4</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic13.jpg" alt="pic 2">
+                    <div class="caption">Caption 5</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic4.jpg" alt="pic 2">
+                    <div class="caption">Caption 6</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic5.jpg" alt="pic 2">
+                    <div class="caption">Caption 7</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic7.jpg" alt="pic 2">
+                    <div class="caption">Caption 8</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic16.jpg" alt="pic 2">
+                    <div class="caption">Caption 9</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic11.jpg" alt="pic 15">
+                    <div class="caption">Caption 15</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic15.jpg" alt="pic 2">
+                    <div class="caption">Caption 10</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic12.jpg" alt="pic 2">
+                    <div class="caption">Caption 11</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic13.jpg" alt="pic 2">
+                    <div class="caption">Caption 12</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic14.jpg" alt="pic 2">
+                    <div class="caption">Caption 13</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic2.jpg" alt="pic 2">
+                    <div class="caption">Caption 14</div>
+                </div>
+                <div class="slide fade">
+                    <img src="/static/pic9.jpg" alt="pic 15">
+                    <div class="caption">Caption 15</div>
+                </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+
+<style>
+    .slideshow-container {
+        position: relative;
+        max-width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+    .slideshow {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        display: none;
+        text-align: center;
+    }
+    .slide img {
+        width: 27%;
+        border-radius: 10px;
+    }
+    .caption {
+        color: #E39E54;
+        font-size: 1.2em;
+        padding: 10px;
+    }
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        width: auto;
+        padding: 16px;
+        color: pink;
+        font-weight: bold;
+        font-size: 25px;
+        transition: 0.6s ease;
+        user-select: none;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .prev {
+        left: calc(29% - 30px); /* Adjusted to align next to the image */
+    }
+    .next {
+        right: calc(29% - 30px); /* Adjusted to align next to the image */
+    }
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+</style>
+
+<script>
+    let slideIndex = 1;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(n) {
+        if (n > totalSlides) {slideIndex = 1}
+        if (n < 1) {slideIndex = totalSlides}
+        for (let i = 0; i < totalSlides; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+
+    function plusSlides(n) {
+        showSlide(slideIndex += n);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        showSlide(slideIndex);
+    });
+
+    // Timer script
+    function updateTime() {
+        const startDate = new Date("September 19, 2023 18:00:00");
+        const now = new Date();
+        const diff = now - startDate;
+
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+        const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+        const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("time").innerHTML =
+            `${years}y : ${months}m : ${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+    }
+
+    setInterval(updateTime, 1000);
+</script>
+
 </body>
 </html>
